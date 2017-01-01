@@ -16,12 +16,10 @@
   <div id="columns">
     <div id="side">
       <% if @cart %>
-      <div id="cart"
-        <% if @cart.line_items.empty? %>
-          style="display: none"
+      <div id="cart">
+        <%= hidden_dif_if(@cart.line_items.empty?, id: 'cart') do %>
+          <%= render @cart %>
         <% end %>
-          >
-        <%= render @cart %>
       </div>
       <% end %>
       <ul>

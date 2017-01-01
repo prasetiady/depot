@@ -27,6 +27,18 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
     assert_select 'td', "Programming Ruby 1.9"
   end
 
+  test "should create line_item via ajax" do
+    assert_difference('LineItem.count') do
+      post line_items_url, params: { product_id: products(:ruby).id },
+        xhr: true
+    end
+
+    assert_response :success
+    assert_select_jquery :html, '#cart' do
+      assert_select 'tr#current_item td', /Programming Ruby 1.9/
+    end
+  end
+
   test "should accumulate quantity" do
     post line_items_url, params: { product_id: products(:ruby).id }
     assert_no_difference('LineItem.count') do
@@ -35,7 +47,7 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
 
     follow_redirect!
 
-    assert_select 'td', "2\u00D7" 
+    assert_select 'td', "2\u00D7"
     assert_select 'td', "Programming Ruby 1.9"
   end
 

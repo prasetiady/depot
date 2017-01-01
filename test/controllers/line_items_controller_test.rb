@@ -26,6 +26,17 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
     assert_select 'li', "1 \u00D7 Programming Ruby 1.9"
   end
 
+  test "should accumulate quantity" do
+    post line_items_url, params: { product_id: products(:ruby).id }
+    assert_no_difference('LineItem.count') do
+      post line_items_url, params: { product_id: products(:ruby).id }
+    end
+
+    follow_redirect!
+
+    assert_select 'li', "2 \u00D7 Programming Ruby 1.9"
+  end
+
   test "should show line_item" do
     get line_item_url(@line_item)
     assert_response :success

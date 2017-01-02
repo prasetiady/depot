@@ -5,14 +5,14 @@ class OrderMailerTest < ActionMailer::TestCase
     mail = OrderMailer.received(orders(:one))
     assert_equal "Depot Order Confirmation", mail.subject
     assert_equal ["dedy.berastagi@gmail.com"], mail.to
-    assert_equal ["from@example.com"], mail.from
+    assert_equal ["prasetiady22@gmail.com"], mail.from
   end
 
   test "shipped" do
     mail = OrderMailer.shipped(orders(:one))
     assert_equal "Depot Order Shipped", mail.subject
     assert_equal ["dedy.berastagi@gmail.com"], mail.to
-    assert_equal ["from@example.com"], mail.from
+    assert_equal ["prasetiady22@gmail.com"], mail.from
   end
 
 end

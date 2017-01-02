@@ -18,7 +18,7 @@ module Depot
       port:                 587,
       domain:               'gmail.com',
       authentication:       'plain',
-      user_name:            'prasetiady22',
+      user_name:            'prasetiady22@gmail.com',
       password:             '!!Secure@@',
       enable_starttls_auto: true
     }

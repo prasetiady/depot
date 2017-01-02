@@ -2,7 +2,7 @@ require 'test_helper'
 
 class LineItemsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @line_item = line_items(:one)
+    @line_item = line_items(:two)
   end
 
   test "should get index" do
@@ -73,5 +73,18 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to store_index_url
+  end
+
+  test "should reduce quantity" do
+    @line_item.quantity += 1
+    @line_item.save
+
+    assert_no_difference('LineItem.count', -1) do
+      delete line_item_url(@line_item)
+    end
+
+    assert_difference('LineItem.count', -1) do
+      delete line_item_url(@line_item)
+    end
   end
 end

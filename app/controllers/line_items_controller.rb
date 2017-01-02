@@ -1,6 +1,6 @@
 class LineItemsController < ApplicationController
   include CurrentCart
-  before_action :set_cart, only: [:create]
+  before_action :set_cart, only: [:create, :destroy]
   before_action :set_line_item, only: [:show, :edit, :update, :destroy]
 
   # GET /line_items
@@ -60,7 +60,7 @@ class LineItemsController < ApplicationController
   # DELETE /line_items/1
   # DELETE /line_items/1.json
   def destroy
-    @line_item.destroy
+    @line_item.reduce_quantity
     respond_to do |format|
       format.html { redirect_to store_index_url }
       format.json { head :no_content }
@@ -75,7 +75,6 @@ class LineItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def line_item_params
-      # params.require(:line_item).permit(:product_id, :cart_id)
       params.require(:line_item).permit(:product_id)
     end
 end

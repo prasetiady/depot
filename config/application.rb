@@ -19,7 +19,7 @@ module Depot
       domain:               'gmail.com',
       authentication:       'plain',
       user_name:            'prasetiady22@gmail.com',
-      password:             '!!Secure@@',
+      password:             'XXXXXX',
       enable_starttls_auto: true
     }
   end
